@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Feira Digital de Trocas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- CABEÇALHO -->
+    <header class="cabecalho">
+        <p class="gabarito"></p>
+        <h1>Feira Digital de Trocas</h1>
+        <p class="subtitulo">
+            Cadastre itens para troca ou doação, pesquise, filtre, reserve e mantenha os dados salvos no navegador.
+        </p>
+        <p class="atalho">
+            Atalho: pressione <kbd>/</kbd> para focar a pesquisa e <kbd>Esc</kbd> para limpá-la
+        </p>
+    </header>
+
+    <!-- CADASTRO -->
+    <section id="cadastro" class="card">
+        <h2>Cadastrar item</h2>
+
+        <form id="formulario">
+            <div class="grid-campos">
+                <div class="campo">
+                    <label for="nome-item">Nome do item <span class="obrigatorio">*</span></label>
+                    <input type="text" id="nome-item" name="nome-item" placeholder="Ex: Playstation 5" required>
+                </div>
+
+                <div class="campo">
+                    <label for="categoria">Categoria <span class="obrigatorio">*</span></label>
+                    <select id="categoria" name="categoria" required>
+                        <option value="">Selecione</option>
+                        <option value="Livros">Livros</option>
+                        <option value="Consoles">Consoles</option>
+                        <option value="Computadores gamers">Computadores gamers</option>
+                        <option value="Celulares">Celulares</option>
+                        <option value="livro virtual">livro virtual</option>
+                    </select>
+                </div>
+
+                <div class="campo">
+                    <label for="estado">Estado de conservação <span class="obrigatorio">*</span></label>
+                    <select id="estado" name="estado" required>
+                        <option value="">Selecione</option>
+                        <option value="Novo">Novo</option>
+                        <option value="Bom">Bom</option>
+                        <option value="Desgastado">Desgastado</option>
+                        <option value="Péssimo">Péssimo</option>
+                    </select>
+                </div>
+
+                <div class="campo">
+                    <label for="disponibilidade">Disponibilidade <span class="obrigatorio">*</span></label>
+                    <select id="disponibilidade" name="disponibilidade" required>
+                        <option value="">Selecione</option>
+                        <option value="Venda">Venda</option>
+                        <option value="Troca">Troca</option>
+                        <option value="Doação">Doação</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="campo">
+                <label for="responsavel">Responsável <span class="obrigatorio">*</span></label>
+                <input type="text" id="responsavel" name="responsavel" placeholder="Nome do responsável" required>
+            </div>
+
+            <div class="campo">
+                <label for="descricao">Descrição <span class="obrigatorio">*</span></label>
+                <textarea id="descricao" name="descricao" rows="3" maxlength="180" placeholder="Descrição do produto" required></textarea>
+                <div class="contador"><span id="contador">0</span>/180</div>
+            </div>
+
+            <div class="botoes">
+                <button type="submit" id="adicionar">Adicionar Item</button>
+                <button type="button" id="carregar">Carregar exemplo</button>
+                <button type="reset" id="apagar">Apagar tudo</button>
+            </div>
+        </form>
+    </section>
+
+    <!-- RESUMO -->
+    <section id="resumo" class="card">
+        <h2>Resumo</h2>
+        <div class="resumo-cards">
+            <div class="card-resumo total">
+                <span class="label">Total</span>
+                <span class="valor" id="total">0</span>
+            </div>
+            <div class="card-resumo disponiveis">
+                <span class="label">Disponíveis</span>
+                <span class="valor" id="disponiveis">0</span>
+            </div>
+            <div class="card-resumo reservados">
+                <span class="label">Reservados</span>
+                <span class="valor" id="reservados">0</span>
+            </div>
+            <div class="card-resumo doacoes">
+                <span class="label">Doações</span>
+                <span class="valor" id="doacoes">0</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- PESQUISA E FILTROS -->
+    <section id="pesquisa" class="card">
+        <h2>Pesquisa e filtros</h2>
+
+        <div class="filtros">
+            <div class="campo">
+                <label for="pesquisar">Pesquisar</label>
+                <input type="text" id="pesquisar" placeholder="Nome ou descrição">
+            </div>
+
+            <div class="campo">
+                <label for="filtro-categoria">Categoria</label>
+                <select id="filtro-categoria">
+                    <option value="">Todas</option>
+                    <option value="Livros">Livros</option>
+                    <option value="Consoles">Consoles</option>
+                    <option value="Computadores gamers">Computadores gamers</option>
+                    <option value="Celulares">Celulares</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label for="filtro-tipo">Tipo</label>
+                <select id="filtro-tipo">
+                    <option value="">Todos</option>
+                    <option value="Venda">Venda</option>
+                    <option value="Troca">Troca</option>
+                    <option value="Doação">Doação</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label for="filtro-situacao">Situação</label>
+                <select id="filtro-situacao">
+                    <option value="">Todos</option>
+                    <option value="disponivel">Disponível</option>
+                    <option value="reservado">Reservado</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- ITENS CADASTRADOS -->
+    <section id="itens" class="card">
+        <div class="itens-header">
+            <h2>Itens cadastrados</h2>
+            <span id="qtd-resultados">0 resultado(s)</span>
+        </div>
+
+        <div id="lista-itens">
+            <!-- Exemplo de card (o JS vai gerar dinamicamente) -->
+            <!--
+            <article class="item-card">
+                <div class="item-topo">
+                    <h3 class="item-titulo">Livro de JavaScript</h3>
+                    <span class="badge disponivel">disponível</span>
+                </div>
+
+                <div class="tags">
+                    <span class="tag">Livros</span>
+                    <span class="tag">Doação</span>
+                    <span class="tag">Bom</span>
+                </div>
+
+                <p class="item-descricao">Livro sobre os fundamentos de JavaScript</p>
+                <p class="item-responsavel">Responsável: Jackson</p>
+
+                <div class="item-acoes">
+                    <button class="btn-reservar">Reservar item</button>
+                    <button class="btn-excluir">Excluir</button>
+                </div>
+            </article>
+            -->
+        </div>
+    </section>
+<footer>
+    <p class="rodape">
+        Demonstração completa de HTML, CSS, JavaScript, eventos, DOM, funções e Local Storage.
+    </p>
+</footer>
+    <script src="script.js"></script>
+</body>
+</html>
